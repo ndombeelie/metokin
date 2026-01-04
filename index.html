@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo Pro - Premium Edition</title>
+    <!-- Utilisation de Lucide Icons via CDN pour des icônes vectorielles nettes -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="api/api.js"></script>
+</head>
+<body data-theme="dark">
+
+    <div class="app-container">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">
+                <i data-lucide="sun"></i>
+            </button>
+            
+            <div class="location-display" onclick="toggleCityModal()">
+                <h2 id="currentCity">Paris <i data-lucide="chevron-down" style="width: 16px;"></i></h2>
+                <p id="currentCountry">France</p>
+            </div>
+
+            <button class="icon-btn" onclick="refreshData()">
+                <i data-lucide="refresh-cw"></i>
+            </button>
+        </div>
+
+        <!-- Main Weather -->
+        <div class="hero-weather">
+            <span class="weather-visual" id="weatherIcon">☀️</span>
+            <div class="main-temp" id="tempDisplay">24°</div>
+            <div class="main-desc" id="weatherDesc">Ciel Dégagé</div>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="details-grid">
+            <div class="detail-card">
+                <div class="detail-icon"><i data-lucide="wind"></i></div>
+                <div class="detail-info">
+                    <span class="label">Vent</span>
+                    <span class="value" id="windValue">14 km/h</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon"><i data-lucide="droplets"></i></div>
+                <div class="detail-info">
+                    <span class="label">Humidité</span>
+                    <span class="value" id="humidityValue">42%</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon"><i data-lucide="sun"></i></div>
+                <div class="detail-info">
+                    <span class="label">Indice UV</span>
+                    <span class="value" id="uvValue">6 (Élevé)</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon"><i data-lucide="eye"></i></div>
+                <div class="detail-info">
+                    <span class="label">Visibilité</span>
+                    <span class="value" id="visValue">10 km</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon"><i data-lucide="thermometer"></i></div>
+                <div class="detail-info">
+                    <span class="label">Ressenti</span>
+                    <span class="value" id="feelsLike">26°</span>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon"><i data-lucide="gauge"></i></div>
+                <div class="detail-info">
+                    <span class="label">Pression</span>
+                    <span class="value" id="pressureValue">1015 hPa</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- City Selection Modal -->
+        <div id="cityModal">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h3 style="color: var(--text-main)">Choisir une ville</h3>
+                <button class="icon-btn" onclick="toggleCityModal()"><i data-lucide="x"></i></button>
+            </div>
+            <input type="text" class="search-input" placeholder="Rechercher une ville..." oninput="filterCities(this.value)">
+            <ul class="city-list" id="cityList">
+                <li class="city-item" onclick="selectCity('Paris', 'France')"><span>Paris</span> <small>FR</small></li>
+                <li class="city-item" onclick="selectCity('Londres', 'Royaume-Uni')"><span>Londres</span> <small>UK</small></li>
+                <li class="city-item" onclick="selectCity('New York', 'États-Unis')"><span>New York</span> <small>US</small></li>
+                <li class="city-item" onclick="selectCity('Tokyo', 'Japon')"><span>Tokyo</span> <small>JP</small></li>
+                <li class="city-item" onclick="selectCity('Marrakech', 'Maroc')"><span>Marrakech</span> <small>MA</small></li>
+                <li class="city-item" onclick="selectCity('Montréal', 'Canada')"><span>Montréal</span> <small>CA</small></li>
+            </ul>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="projects-section">
+            <h3 style="color: var(--text-main); margin-bottom: 16px;">Mes Projets</h3>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Les projets seront générés par JavaScript -->
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
